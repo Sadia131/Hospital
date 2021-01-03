@@ -13,11 +13,16 @@ namespace HospitalManagement1.PresentationLayer
 {
     public partial class StaffManagement : Form
     {
-        public StaffManagement()
+        HomePage homePage;
+        public StaffManagement(HomePage homePage)
         {
+            this.homePage = homePage;
             InitializeComponent();
             addStaffButton.Click += this.RefreshGridView;
             updateStaffButton.Click += this.RefreshGridView;
+            DeleteStaffButton.Click += this.RefreshGridView;
+
+
         }
 
         private void StaffManagement_FormClosing(object sender, FormClosingEventArgs e)
@@ -29,17 +34,22 @@ namespace HospitalManagement1.PresentationLayer
         {
             StaffService staffService = new StaffService();
             loadStaffDataGridView.DataSource = staffService.GetStaffList();
+            staffService = new StaffService();
+            SearchStaffcomboBox.DataSource = staffService.GetStaffNameList();
         }
 
         private void RefreshGridView(object sender, EventArgs e)
         {
             StaffService staffService = new StaffService();
             loadStaffDataGridView.DataSource = staffService.GetStaffList();
+            staffService = new StaffService();
+            SearchStaffcomboBox.DataSource = staffService.GetStaffNameList();
         }
 
         private void ClearInputFields()
         {
-            addStaffNameTextBox.Text = updateStaffNameTextBox.Text = string.Empty;
+            addStaffNameTextBox.Text = updateStaffNameTextBox.Text =DeleteStaffIdtextBox.Text= string.Empty;
+
         }
 
         private void addStaffButton_Click(object sender, EventArgs e)
@@ -77,6 +87,38 @@ namespace HospitalManagement1.PresentationLayer
             {
                 MessageBox.Show("Error in updating Staff");
             }
+        }
+
+        private void DeleteStaffbutton_Click(object sender, EventArgs e)
+        {
+            StaffService staffService = new StaffService();
+            int result = staffService.DeleteStaff(Convert.ToInt32(DeleteStaffIdtextBox.Text));
+            if (result > 0)
+            {
+                MessageBox.Show(" Deleted Successfully...");
+                ClearInputFields();
+            }
+            else
+            {
+                MessageBox.Show("Error!!!");
+            }
+        }
+
+        private void SearchStaffcomboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            StaffService staffService = new StaffService();
+            StaffwiseEmployeelistdataGridView.DataSource = staffService.GetEmployeeListByStaff(SearchStaffcomboBox.Text);
+        }
+
+        private void StaffwiseEmployeelistdataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            homePage.Show();
+            this.Hide();
         }
     }
 }

@@ -65,13 +65,25 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BussinessLogicLayer\EmployeeService.cs" />
     <Compile Include="BussinessLogicLayer\StaffService.cs" />
+    <Compile Include="DataAccessLayer\EmployeeDataAccess.cs" />
     <Compile Include="DataAccessLayer\StaffDataAccess.cs" />
     <Compile Include="DataAccessLayer\DataAccess.cs" />
-    <Compile Include="Entities\AdditionalStaff.cs" />
-    <Compile Include="Entities\Doctor.cs" />
-    <Compile Include="Entities\Nurse.cs" />
+    <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Staff.cs" />
+    <Compile Include="PresentationLayer\EmployeeManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\EmployeeManagement.Designer.cs">
+      <DependentUpon>EmployeeManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\HomePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\HomePage.Designer.cs">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\StaffManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +92,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PresentationLayer\EmployeeManagement.resx">
+      <DependentUpon>EmployeeManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\HomePage.resx">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\StaffManagement.resx">
       <DependentUpon>StaffManagement.cs</DependentUpon>
     </EmbeddedResource>

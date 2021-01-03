@@ -32,5 +32,20 @@ namespace HospitalManagement1.BussinessLogicLayer
             return this.staffDataAccess.UpdateStaff(staff);
         }
 
+        public int DeleteStaff(int id)
+        {
+            return this.staffDataAccess.DeleteStaff(id);
+        }
+
+        public List<string> GetStaffNameList()
+        {
+            return this.staffDataAccess.GetAllStaffNames();
+        }
+
+        public List<Employee> GetEmployeeListByStaff(string staffName)
+        {
+            return this.staffDataAccess.GetEmployeeListByStaff(staffName);
+        }
+
     }
 }
